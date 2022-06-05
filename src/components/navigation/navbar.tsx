@@ -2,36 +2,35 @@ import { AppProps, AppPropsWithTheme } from "../../types/basicTypes";
 import styled from 'styled-components';
 import { maxLayout, mediumLayout } from "../constants";
 import Icon from "../media/icons";
-import React from "react";
+import React, { CSSProperties } from "react";
 
 const NavbarBrand = ({ children = 'Brand' }: AppProps) => <div className="brand">{children}</div>
 
-export default function Navbar(
-    {
-        darkMode = false,
-        children
-    }: AppPropsWithTheme
-) {
+export default function Navbar(props : AppPropsWithTheme ) {
 
     return (
-        <NavStyle darkMode={darkMode}>
-            {children}
+        <NavStyle darkMode={props.darkMode} style={props.style}>
+            <div className="navbar">
+                {props.children}
+            </div>
         </NavStyle>
     );
 
 }
 
-export const Nav = ({ children }: AppProps) => (<ul> {children} </ul>);
+export const Nav = (props: AppProps) => (<ul style={props.style}> {props.children} </ul>);
 
 interface NavLinkProps {
     href: string;
     children: React.ReactNode;
+    "a-style"?: CSSProperties;
+    "li-style"?: CSSProperties;
 }
 
 const NavLink = (props: NavLinkProps) => {
     return (
         <>
-            <li><a href={props.href}>{props.children}</a></li>
+            <li style={props["li-style"]}><a href={props.href} style={props["a-style"]}>{props.children}</a></li>
         </>
     );
 }
@@ -41,10 +40,22 @@ interface NavToggleProps {
 }
 
 const NavbarToggle = (props: NavToggleProps) => {
+
+    function toggleNavbar() {
+        const navbar = document.querySelector('.navbar')
+        const lis = navbar?.querySelectorAll('li');
+
+        lis?.forEach(li => {
+            const style = getComputedStyle(li);
+
+            li.style.display = (style.display == 'block') ? 'none' : 'block';
+        }); 
+    }
+    
     return(
         <>
-            <button className="toggleButton">
-                <Icon name="view_headline" />
+            <button className="toggleButton" type="button" onClick={toggleNavbar}>
+                <Icon name="menu" />
             </button>
         </>
     );    

@@ -1,5 +1,4 @@
 import Box from "./components/layout/box";
-import Icon from "./components/media/icons";
 import Navbar, { Nav } from "./components/navigation/navbar";
 
 export default function App() {
@@ -19,7 +18,7 @@ export default function App() {
       </Navbar>
 
 
-      <Box bg="cyan" width="200px">
+      <Box bg="blue" width="200px">
         this is a box.
       </Box>
     </>

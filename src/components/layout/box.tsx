@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { CSSProperties } from "styled-components";
 import { AppProps } from "../../types/basicTypes";
 
 interface BoxProps extends AppProps {
