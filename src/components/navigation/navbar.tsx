@@ -50,20 +50,20 @@ const NavbarToggle = (props: NavToggleProps) => {
         const navbar = document.querySelector('.navbar')
         const navbarMobile = navbar?.querySelector('.navbar-mobile') as HTMLElement;
 
-        if(navbarMobile) {
+        if (navbarMobile) {
             const style = getComputedStyle(navbarMobile);
 
-            window.onresize = (ev) => { 
-                const {innerWidth} : any = ev.target;
-    
-                if(innerWidth >= maxLayout.width) {
+            window.onresize = (ev) => {
+                const { innerWidth }: any = ev.target;
+
+                if (innerWidth >= maxLayout.width) {
                     return navbarMobile.style.setProperty('display', 'none');
-                } 
+                }
             }
 
-            if(style.display == 'none') {
-               return navbarMobile.style.setProperty('display', 'block');
-            } 
+            if (style.display == 'none') {
+                return navbarMobile.style.setProperty('display', 'block');
+            }
 
             return navbarMobile.style.setProperty('display', 'none');
 
@@ -83,6 +83,38 @@ const NavbarCollapse = (props: { children: React.ReactNode, id: string }) => {
     return (
         <>
             {props.children}
+        </>
+    );
+}
+
+interface NavDropDownProps extends AppProps {
+    title: string;
+    id: string;
+}
+
+export const NavDropdown = (props: NavDropDownProps) => {
+
+    function detectDropdownClick(e : any) {
+        const dropdownExpanded = document.querySelector(`#${props.id}`);
+        const ulDropdown = dropdownExpanded?.querySelector('ul.dropdown') as HTMLElement;
+        const ulDropDownStyle = getComputedStyle(ulDropdown);
+        
+        // toggle position of ul.dropdown
+        if(ulDropDownStyle.top.startsWith('-')) {
+            ulDropdown.style.setProperty('top', '20px');
+        } else {
+            ulDropdown.style.setProperty('top', '-8000px');
+        }
+    }
+    
+    return (
+        <>
+            <div className="dropdown-expanded" id={props.id}>
+                <li className="dropdown-menu" onClick={detectDropdownClick}> <a href="javascript:void(0);">{props.title}</a> </li>
+                <ul className="dropdown">
+                    {props.children}
+                </ul>
+            </div>
         </>
     );
 }
@@ -111,6 +143,39 @@ const NavStyle = styled.nav<AppPropsWithTheme>`
         display: contents;
     }
     
+    .dropdown-expanded {
+        position: relative;
+        display: inline;
+        
+        li.dropdown-menu {
+            display: inline;
+        }
+
+        ul.dropdown {
+
+            position: absolute; 
+            left: 5px; 
+            z-index: 10000000000;
+            padding:6px 0 0; 
+            top:-8000px;
+            background: #000; 
+            min-width: 120px; 
+            box-sizing: border-box; 
+            list-style: none; 
+            transition: top 1s;
+        }
+    }
+
+    ul {
+        .dropdown-expanded {
+
+        }
+                
+        .dropdown-mobile {
+            display: none;
+         }
+    }
+    
     .navbar-mobile {
         display: none;
     }
@@ -125,9 +190,12 @@ const NavStyle = styled.nav<AppPropsWithTheme>`
         text-transform:capitalize;
     }
 
+    li {
+        list-style: none;
+    }
+
     .navbar-expanded {
         li {
-            list-style:none;
             display:inline;
     
             a {
@@ -151,6 +219,12 @@ const NavStyle = styled.nav<AppPropsWithTheme>`
         box-sizing: content-box;
         height: auto;
         padding: 20px 0;
+
+        ul {
+            .dropdown-expanded {
+                display: none;
+            }
+        }
 
         button.toggleButton {
             position: absolute;
@@ -179,8 +253,10 @@ const NavStyle = styled.nav<AppPropsWithTheme>`
         .navbar-mobile {
             li {
                 a {
+                    display: block;
                     height: auto;
                     padding:10px 0;
+                    margin: 10px 0;
                 }
             }
         }
