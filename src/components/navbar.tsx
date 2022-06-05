@@ -1,8 +1,8 @@
-import { AppProps, AppPropsChildren, AppPropsWithTheme } from "../../types/basicTypes";
+import { AppProps, AppPropsChildren, AppPropsWithTheme } from "../types/basicTypes";
 import styled from 'styled-components';
-import { maxLayout } from "../constants";
-import Icon from "../media/icons";
-import React, { createContext, CSSProperties, useContext, useEffect, useState } from "react";
+import { maxLayout } from "./constants";
+import Icon from "./media/icons";
+import React, { createContext, CSSProperties, useState } from "react";
 
 const ThemeContext = createContext({});
 
@@ -151,7 +151,7 @@ interface NavDropDonwItem extends NavLinkProps {
 
 const NavDropDownItem = (props: NavDropDonwItem) => {
 
-    const { darkMode, setDarkMode } = useContext(ThemeContext) as ThemeContextProps;
+    // const { darkMode, setDarkMode } = useContext(ThemeContext) as ThemeContextProps;
 
     return (
         <>
