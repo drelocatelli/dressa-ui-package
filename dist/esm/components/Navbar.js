@@ -1,174 +1,79 @@
-import { AppProps, AppPropsChildren, AppPropsWithTheme } from "../types/basicTypes";
+import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "react/jsx-runtime";
 import styled from 'styled-components';
 import { maxLayout } from "./constants";
 import Icon from "./Icon";
-import React, { createContext, CSSProperties, useState } from "react";
-
+import { createContext, useState } from "react";
 const ThemeContext = createContext({});
-
-const NavbarBrand = ({ children = 'Brand' }: AppProps) => <div className="brand">{children}</div>
-
-export default function Navbar(props: AppPropsWithTheme) {
-
-    const [darkMode, setDarkMode] = useState<boolean>(props.darkMode ?? false);
-
-    return (
-        <ThemeContext.Provider value={{ darkMode, setDarkMode }}>
-            <NavStyle darkMode={darkMode} style={props.style}>
-                <div className="navbar">
-                    {props.children}
-                </div>
-            </NavStyle>
-        </ThemeContext.Provider>
-    );
-
+const NavbarBrand = ({ children = 'Brand' }) => _jsx("div", Object.assign({ className: "brand" }, { children: children }));
+export default function Navbar(props) {
+    var _a;
+    const [darkMode, setDarkMode] = useState((_a = props.darkMode) !== null && _a !== void 0 ? _a : false);
+    return (_jsx(ThemeContext.Provider, Object.assign({ value: { darkMode, setDarkMode } }, { children: _jsx(NavStyle, Object.assign({ darkMode: darkMode, style: props.style }, { children: _jsx("div", Object.assign({ className: "navbar" }, { children: props.children })) })) })));
 }
-
-export const Nav = (props: AppProps) => (
-    <>
-        <ul className="navbar-expanded" style={props.style}> {props.children} </ul>
-        <ul className="navbar-mobile" style={props.style}> {props.children} </ul>
-    </>
-);
-
-interface NavLinkProps {
-    href: string;
-    children: React.ReactNode;
-    "a-style"?: CSSProperties;
-    "li-style"?: CSSProperties;
-}
-
-const NavLink = (props: NavLinkProps) => {
-    return (
-        <>
-            <li style={props["li-style"]}><a href={props.href} style={props["a-style"]}>{props.children}</a></li>
-        </>
-    );
-}
-
-interface NavToggleProps {
-    "aria-controls": string;
-}
-
-const NavbarToggle = (props: NavToggleProps) => {
-
+export const Nav = (props) => (_jsxs(_Fragment, { children: [_jsxs("ul", Object.assign({ className: "navbar-expanded", style: props.style }, { children: [" ", props.children, " "] })), _jsxs("ul", Object.assign({ className: "navbar-mobile", style: props.style }, { children: [" ", props.children, " "] }))] }));
+const NavLink = (props) => {
+    return (_jsx(_Fragment, { children: _jsx("li", Object.assign({ style: props["li-style"] }, { children: _jsx("a", Object.assign({ href: props.href, style: props["a-style"] }, { children: props.children })) })) }));
+};
+const NavbarToggle = (props) => {
     function toggleNavbar() {
-        const navbar = document.querySelector('.navbar')
-        const navbarMobile = navbar?.querySelector('.navbar-mobile') as HTMLElement;
-
+        const navbar = document.querySelector('.navbar');
+        const navbarMobile = navbar === null || navbar === void 0 ? void 0 : navbar.querySelector('.navbar-mobile');
         if (navbarMobile) {
             const style = getComputedStyle(navbarMobile);
-
             window.onresize = (ev) => {
-                const { innerWidth }: any = ev.target;
-
+                const { innerWidth } = ev.target;
                 if (innerWidth >= maxLayout.width) {
                     return navbarMobile.style.setProperty('display', 'none');
                 }
-            }
-
+            };
             if (style.display == 'none') {
                 return navbarMobile.style.setProperty('display', 'block');
             }
-
             return navbarMobile.style.setProperty('display', 'none');
-
         }
     }
-
-    return (
-        <>
-            <button className="toggleButton" type="button" onClick={toggleNavbar}>
-                <Icon name="menu" />
-            </button>
-        </>
-    );
-}
-
-const NavbarCollapse = (props: { children: React.ReactNode, id: string }) => {
-    return (
-        <>
-            {props.children}
-        </>
-    );
-}
-
-interface NavDropDownProps extends AppPropsChildren {
-    title: string;
-    id: string;
-}
-
-export const NavDropdown = (props: NavDropDownProps) => {
-
-    function detectDropdownClick(e: any) {
+    return (_jsx(_Fragment, { children: _jsx("button", Object.assign({ className: "toggleButton", type: "button", onClick: toggleNavbar }, { children: _jsx(Icon, { name: "menu" }) })) }));
+};
+const NavbarCollapse = (props) => {
+    return (_jsx(_Fragment, { children: props.children }));
+};
+export const NavDropdown = (props) => {
+    function detectDropdownClick(e) {
         const dropdownExpanded = document.querySelector(`#${props.id}`);
-        const ulDropdown = dropdownExpanded?.querySelector('ul.dropdown') as HTMLElement;
+        const ulDropdown = dropdownExpanded === null || dropdownExpanded === void 0 ? void 0 : dropdownExpanded.querySelector('ul.dropdown');
         const ulDropDownStyle = getComputedStyle(ulDropdown);
-
-        const ulDropDownMobile = document.querySelector('.navbar-mobile ul.dropdown') as HTMLElement;
+        const ulDropDownMobile = document.querySelector('.navbar-mobile ul.dropdown');
         // toggle mobile dropdown
         if (getComputedStyle(ulDropDownMobile).display == 'block') {
             ulDropDownMobile.style.setProperty('display', 'none');
-        } else {
+        }
+        else {
             ulDropDownMobile.style.setProperty('display', 'block');
         }
-
         // toggle position of ul.dropdown
         if (ulDropDownStyle.top.startsWith('-')) {
             const navPosition = parseInt(navHeight);
-
             ulDropdown.style.setProperty('top', `${navPosition}px`);
-        } else {
+        }
+        else {
             ulDropdown.style.setProperty('top', '-8000px');
         }
     }
-
-    return (
-        <>
-            <div className="dropdown-expanded" id={props.id}>
-                <li className="dropdown-menu" onClick={detectDropdownClick}>
-                    <a href="javascript:void(0);">
-                        {props.title}&nbsp;
-                        <Icon name="keyboard_arrow_down" size={20} />
-                    </a>
-                </li>
-                <ul className="dropdown">
-                    {props.children}
-                </ul>
-            </div>
-        </>
-    );
-}
-
-interface NavDropDonwItem extends NavLinkProps {
-    href: string;
-}
-
-const NavDropDownItem = (props: NavDropDonwItem) => {
-
+    return (_jsx(_Fragment, { children: _jsxs("div", Object.assign({ className: "dropdown-expanded", id: props.id }, { children: [_jsx("li", Object.assign({ className: "dropdown-menu", onClick: detectDropdownClick }, { children: _jsxs("a", Object.assign({ href: "javascript:void(0);" }, { children: [props.title, "\u00A0", _jsx(Icon, { name: "keyboard_arrow_down", size: 20 })] })) })), _jsx("ul", Object.assign({ className: "dropdown" }, { children: props.children }))] })) }));
+};
+const NavDropDownItem = (props) => {
     // const { darkMode, setDarkMode } = useContext(ThemeContext) as ThemeContextProps;
-
-    return (
-        <>
-            <li style={props["li-style"]}>
-                <a href={props.href} style={props["a-style"]}>{props.children}</a>
-            </li>
-        </>
-    );
-}
-
+    return (_jsx(_Fragment, { children: _jsx("li", Object.assign({ style: props["li-style"] }, { children: _jsx("a", Object.assign({ href: props.href, style: props["a-style"] }, { children: props.children })) })) }));
+};
 //*-------------------------------------------- childs
 Navbar.Brand = NavbarBrand;
 Navbar.Toggle = NavbarToggle;
 Navbar.Collapse = NavbarCollapse;
-
 Nav.Link = NavLink;
 NavDropdown.Item = NavDropDownItem;
-
 //*-------------------------------------------- style
 const navHeight = '72px';
-
-const NavStyle = styled.nav<AppPropsWithTheme>`
+const NavStyle = styled.nav `
     ${props => (props.darkMode ? NavTheme.dark : NavTheme.light)};
 
     display: flex;
@@ -301,7 +206,6 @@ const NavStyle = styled.nav<AppPropsWithTheme>`
     }
 
 `;
-
 const NavTheme = {
     dark: `
         background: #202024;
@@ -325,7 +229,6 @@ const NavTheme = {
             }
         }
     `,
-
     light: `
         background: #f9f9f9;
         color: #000;
@@ -347,4 +250,5 @@ const NavTheme = {
             }
         }
     `
-}
+};
+//# sourceMappingURL=Navbar.js.map

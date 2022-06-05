@@ -1,2 +1,2 @@
-export * from './media/icons';
-export * from './navbar';
+export * from './Icon';
+export * from './Navbar';

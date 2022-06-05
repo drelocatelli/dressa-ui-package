@@ -16,7 +16,7 @@ export default function Icon(
     return <IconStyle style={{...props.style, fontSize: `${props.size}px`}}>{props.name}</IconStyle>
 }
 
-const IconStyle = styled.div`
+export const IconStyle = styled.div`
     font-family: 'Material Icons', monospace;
     font-weight: normal;
     font-style: normal;
