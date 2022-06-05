@@ -93,6 +93,10 @@ const NavStyle = styled.nav<AppPropsWithTheme>`
         display:none;
     }
 
+    .navbar {
+        display: contents;
+    }
+
     .brand {
         user-select:none;
         font-size: 1.3rem;
