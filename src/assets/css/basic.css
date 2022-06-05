@@ -3,6 +3,11 @@
     src: url('../fonts/Roboto-Regular.ttf');
 }
 
+@font-face {
+    font-family: 'Material Icons';
+    src: url('../fonts/Material\ Icons.woff2') format('woff2');
+}
+
 * {
     font-family: 'Roboto', sans-serif;
     padding: 0;
