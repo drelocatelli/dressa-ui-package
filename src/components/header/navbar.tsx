@@ -1,6 +1,5 @@
 import { AppProps, AppPropsWithTheme } from "../../types/basicTypes";
 import styled from 'styled-components';
-import React from "react";
 
 const NavbarBrand = ({children = 'Brand'} : AppProps) => <div className="brand">{children}</div>
 
@@ -12,20 +11,31 @@ export default function Navbar(
 ) {
 
     return(
-        <Nav darkMode={darkMode}>
+        <NavStyle darkMode={darkMode}>
             {children}
-        </Nav>
+        </NavStyle>
     );
 
 }
 
+export const Nav = ({children}: AppProps) => ( <ul> {children} </ul> );
+
+interface NavLinkProps {
+    href: string;
+    children: React.ReactNode;
+}
+
+const NavLink = (props : NavLinkProps) => <li><a href={props.href}>{props.children}</a></li>;
+
+
+//*-------------------------------------------- childs
 Navbar.Brand = NavbarBrand;
+Nav.Link = NavLink;
 
-export {Navbar};
-
+//*-------------------------------------------- style
 const navHeight = '72px';
 
-const Nav = styled.nav<AppPropsWithTheme>`
+const NavStyle = styled.nav<AppPropsWithTheme>`
     ${props => (props.darkMode ? NavTheme.dark : NavTheme.light)};
 
     display: flex;
@@ -48,7 +58,7 @@ const Nav = styled.nav<AppPropsWithTheme>`
             align-items: center;
             height: ${navHeight};
             box-sizing: border-box;
-            margin-right: 15px;
+            margin-right: 10px;
             padding-inline: 12px;
             transition: color .2s;
             
