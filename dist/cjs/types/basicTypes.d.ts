@@ -1,3 +1,4 @@
+/// <reference types="react" />
 import { CSSProperties } from "styled-components";
 export interface AppProps {
     children?: React.ReactNode;

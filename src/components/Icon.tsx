@@ -7,7 +7,7 @@ import styled from "styled-components"
     https://fonts.google.com/icons?selected=Material+Icons
 */
 
-export default function Icon(
+export function Icon(
     props: {
         name: string;
         size?: number;

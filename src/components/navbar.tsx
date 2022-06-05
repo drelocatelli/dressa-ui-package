@@ -2,15 +2,15 @@ import { AppProps, AppPropsChildren, AppPropsWithTheme } from "../types/basicTyp
 import styled from 'styled-components';
 import { maxLayout } from "./constants";
 
-import React, { createContext, CSSProperties, useState } from "react";
-import Icon from "./Icon";
+import { createContext, CSSProperties, useState } from "react";
+import {Icon} from "./Icon";
 
 const ThemeContext = createContext({});
 
 export const NavbarBrand = ({ children = 'Brand' }: AppProps) => <div className="brand">{children}</div>
 
 
-export default function Navbar(props: AppPropsWithTheme) {
+export function Navbar(props: AppPropsWithTheme) {
 
     const [darkMode, setDarkMode] = useState<boolean>(props.darkMode ?? false);
 
@@ -104,7 +104,7 @@ interface NavDropDownProps extends AppPropsChildren {
 
 export const NavDropdown = (props: NavDropDownProps) => {
 
-    function detectDropdownClick(e: any) {
+    function detectDropdownClick() {
         const dropdownExpanded = document.querySelector(`#${props.id}`);
         const ulDropdown = dropdownExpanded?.querySelector('ul.dropdown') as HTMLElement;
         const ulDropDownStyle = getComputedStyle(ulDropdown);
