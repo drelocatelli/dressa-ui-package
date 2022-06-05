@@ -5,6 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.IconStyle = void 0;
 const jsx_runtime_1 = require("react/jsx-runtime");
+require("../assets/css/basic.css");
 const styled_components_1 = __importDefault(require("styled-components"));
 /*
     LIST OF ICONS HERE:

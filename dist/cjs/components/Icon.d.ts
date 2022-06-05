@@ -1,4 +1,5 @@
 import { CSSProperties } from "react";
+import '../assets/css/basic.css';
 export default function Icon(props: {
     name: string;
     size?: number;

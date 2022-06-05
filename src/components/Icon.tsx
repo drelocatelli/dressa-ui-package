@@ -1,4 +1,5 @@
 import { CSSProperties } from "react";
+import '../assets/css/basic.css';
 import styled from "styled-components"
 
 /*

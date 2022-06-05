@@ -1,4 +1,5 @@
 import { jsx as _jsx } from "react/jsx-runtime";
+import '../assets/css/basic.css';
 import styled from "styled-components";
 /*
     LIST OF ICONS HERE:

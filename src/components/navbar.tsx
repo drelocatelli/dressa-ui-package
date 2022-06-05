@@ -1,12 +1,15 @@
 import { AppProps, AppPropsChildren, AppPropsWithTheme } from "../types/basicTypes";
 import styled from 'styled-components';
 import { maxLayout } from "./constants";
-import Icon from "./Icon";
+import '../assets/css/basic.css';
+
 import React, { createContext, CSSProperties, useState } from "react";
+import Icon from "./Icon";
 
 const ThemeContext = createContext({});
 
-const NavbarBrand = ({ children = 'Brand' }: AppProps) => <div className="brand">{children}</div>
+export const NavbarBrand = ({ children = 'Brand' }: AppProps) => <div className="brand">{children}</div>
+
 
 export default function Navbar(props: AppPropsWithTheme) {
 
@@ -48,6 +51,7 @@ const NavLink = (props: NavLinkProps) => {
 
 interface NavToggleProps {
     "aria-controls": string;
+    icon?: React.ReactNode;
 }
 
 const NavbarToggle = (props: NavToggleProps) => {
@@ -79,7 +83,7 @@ const NavbarToggle = (props: NavToggleProps) => {
     return (
         <>
             <button className="toggleButton" type="button" onClick={toggleNavbar}>
-                <Icon name="menu" />
+                {props.icon ?? <Icon name="menu" />}
             </button>
         </>
     );
@@ -96,6 +100,7 @@ const NavbarCollapse = (props: { children: React.ReactNode, id: string }) => {
 interface NavDropDownProps extends AppPropsChildren {
     title: string;
     id: string;
+    icon?: React.ReactNode;
 }
 
 export const NavDropdown = (props: NavDropDownProps) => {
@@ -129,7 +134,7 @@ export const NavDropdown = (props: NavDropDownProps) => {
                 <li className="dropdown-menu" onClick={detectDropdownClick}>
                     <a href="javascript:void(0);">
                         {props.title}&nbsp;
-                        <Icon name="keyboard_arrow_down" size={20} />
+                        {props.icon ?? <Icon name="arrow_drop_down" />}
                     </a>
                 </li>
                 <ul className="dropdown">

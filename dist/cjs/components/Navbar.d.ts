@@ -1,5 +1,7 @@
 import { AppProps, AppPropsChildren, AppPropsWithTheme } from "../types/basicTypes";
+import '../assets/css/basic.css';
 import React, { CSSProperties } from "react";
+export declare const NavbarBrand: ({ children }: AppProps) => JSX.Element;
 declare function Navbar(props: AppPropsWithTheme): JSX.Element;
 declare namespace Navbar {
     var Brand: ({ children }: AppProps) => JSX.Element;
@@ -22,10 +24,12 @@ interface NavLinkProps {
 }
 interface NavToggleProps {
     "aria-controls": string;
+    icon?: React.ReactNode;
 }
 interface NavDropDownProps extends AppPropsChildren {
     title: string;
     id: string;
+    icon?: React.ReactNode;
 }
 export declare const NavDropdown: {
     (props: NavDropDownProps): JSX.Element;

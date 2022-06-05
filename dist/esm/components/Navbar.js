@@ -1,10 +1,11 @@
 import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "react/jsx-runtime";
 import styled from 'styled-components';
 import { maxLayout } from "./constants";
-import Icon from "./Icon";
+import '../assets/css/basic.css';
 import { createContext, useState } from "react";
+import Icon from "./Icon";
 const ThemeContext = createContext({});
-const NavbarBrand = ({ children = 'Brand' }) => _jsx("div", Object.assign({ className: "brand" }, { children: children }));
+export const NavbarBrand = ({ children = 'Brand' }) => _jsx("div", Object.assign({ className: "brand" }, { children: children }));
 export default function Navbar(props) {
     var _a;
     const [darkMode, setDarkMode] = useState((_a = props.darkMode) !== null && _a !== void 0 ? _a : false);
@@ -15,6 +16,7 @@ const NavLink = (props) => {
     return (_jsx(_Fragment, { children: _jsx("li", Object.assign({ style: props["li-style"] }, { children: _jsx("a", Object.assign({ href: props.href, style: props["a-style"] }, { children: props.children })) })) }));
 };
 const NavbarToggle = (props) => {
+    var _a;
     function toggleNavbar() {
         const navbar = document.querySelector('.navbar');
         const navbarMobile = navbar === null || navbar === void 0 ? void 0 : navbar.querySelector('.navbar-mobile');
@@ -32,12 +34,13 @@ const NavbarToggle = (props) => {
             return navbarMobile.style.setProperty('display', 'none');
         }
     }
-    return (_jsx(_Fragment, { children: _jsx("button", Object.assign({ className: "toggleButton", type: "button", onClick: toggleNavbar }, { children: _jsx(Icon, { name: "menu" }) })) }));
+    return (_jsx(_Fragment, { children: _jsx("button", Object.assign({ className: "toggleButton", type: "button", onClick: toggleNavbar }, { children: (_a = props.icon) !== null && _a !== void 0 ? _a : _jsx(Icon, { name: "menu" }) })) }));
 };
 const NavbarCollapse = (props) => {
     return (_jsx(_Fragment, { children: props.children }));
 };
 export const NavDropdown = (props) => {
+    var _a;
     function detectDropdownClick(e) {
         const dropdownExpanded = document.querySelector(`#${props.id}`);
         const ulDropdown = dropdownExpanded === null || dropdownExpanded === void 0 ? void 0 : dropdownExpanded.querySelector('ul.dropdown');
@@ -59,7 +62,7 @@ export const NavDropdown = (props) => {
             ulDropdown.style.setProperty('top', '-8000px');
         }
     }
-    return (_jsx(_Fragment, { children: _jsxs("div", Object.assign({ className: "dropdown-expanded", id: props.id }, { children: [_jsx("li", Object.assign({ className: "dropdown-menu", onClick: detectDropdownClick }, { children: _jsxs("a", Object.assign({ href: "javascript:void(0);" }, { children: [props.title, "\u00A0", _jsx(Icon, { name: "keyboard_arrow_down", size: 20 })] })) })), _jsx("ul", Object.assign({ className: "dropdown" }, { children: props.children }))] })) }));
+    return (_jsx(_Fragment, { children: _jsxs("div", Object.assign({ className: "dropdown-expanded", id: props.id }, { children: [_jsx("li", Object.assign({ className: "dropdown-menu", onClick: detectDropdownClick }, { children: _jsxs("a", Object.assign({ href: "javascript:void(0);" }, { children: [props.title, "\u00A0", (_a = props.icon) !== null && _a !== void 0 ? _a : _jsx(Icon, { name: "arrow_drop_down" })] })) })), _jsx("ul", Object.assign({ className: "dropdown" }, { children: props.children }))] })) }));
 };
 const NavDropDownItem = (props) => {
     // const { darkMode, setDarkMode } = useContext(ThemeContext) as ThemeContextProps;
