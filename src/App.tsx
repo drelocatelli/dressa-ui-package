@@ -1,4 +1,5 @@
-import Navbar, { Nav } from "./components/header/navbar";
+import Box from "./components/layout/box";
+import Navbar, { Nav } from "./components/navigation/navbar";
 
 export default function App() {
   return (
@@ -12,6 +13,10 @@ export default function App() {
           <Nav.Link href="/">Edit</Nav.Link>
         </Nav>
       </Navbar>
+
+      <Box bg="cyan" width="200px">
+        this is a box.
+      </Box>
     </>
   );
 }

@@ -39,6 +39,7 @@ const NavStyle = styled.nav<AppPropsWithTheme>`
     ${props => (props.darkMode ? NavTheme.dark : NavTheme.light)};
 
     display: flex;
+    user-select:none;
     height: ${navHeight};
     box-sizing: border-box;
     align-items: center;
@@ -46,6 +47,7 @@ const NavStyle = styled.nav<AppPropsWithTheme>`
 
     .brand {
         user-select:none;
+        font-size: 1.3rem;
         text-transform:capitalize;
     }
 
@@ -83,7 +85,13 @@ const NavTheme = {
 
     light: `
         background: #f9f9f9;
-        color: #333;
+        color: #000;
 
+        a{
+            color: #8f8f8f;
+            &:hover {
+                color: #000;
+            }
+        }
     `
 }
