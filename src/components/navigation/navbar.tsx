@@ -1,4 +1,4 @@
-import { AppProps, AppPropsWithTheme } from "../../types/basicTypes";
+import { AppProps, AppPropsChildren, AppPropsWithTheme } from "../../types/basicTypes";
 import styled from 'styled-components';
 import { maxLayout } from "../constants";
 import Icon from "../media/icons";
@@ -7,10 +7,9 @@ import React, { CSSProperties, useEffect } from "react";
 const NavbarBrand = ({ children = 'Brand' }: AppProps) => <div className="brand">{children}</div>
 
 export default function Navbar(props: AppPropsWithTheme) {
-
     return (
         <NavStyle darkMode={props.darkMode} style={props.style}>
-            <div className="navbar">
+            <div className="navbar" data-darkMode={(props.darkMode) ?? false}>
                 {props.children}
             </div>
         </NavStyle>
@@ -87,34 +86,54 @@ const NavbarCollapse = (props: { children: React.ReactNode, id: string }) => {
     );
 }
 
-interface NavDropDownProps extends AppProps {
+interface NavDropDownProps extends AppPropsChildren {
     title: string;
     id: string;
 }
 
 export const NavDropdown = (props: NavDropDownProps) => {
 
-    function detectDropdownClick(e : any) {
+    function detectDropdownClick(e: any) {
         const dropdownExpanded = document.querySelector(`#${props.id}`);
         const ulDropdown = dropdownExpanded?.querySelector('ul.dropdown') as HTMLElement;
         const ulDropDownStyle = getComputedStyle(ulDropdown);
-        
+
         // toggle position of ul.dropdown
-        if(ulDropDownStyle.top.startsWith('-')) {
-            ulDropdown.style.setProperty('top', '20px');
+        if (ulDropDownStyle.top.startsWith('-')) {
+            const navPosition = parseInt(navHeight) - 18;
+
+            ulDropdown.style.setProperty('top', `${navPosition}px`);
         } else {
             ulDropdown.style.setProperty('top', '-8000px');
         }
     }
-    
+
     return (
         <>
             <div className="dropdown-expanded" id={props.id}>
-                <li className="dropdown-menu" onClick={detectDropdownClick}> <a href="javascript:void(0);">{props.title}</a> </li>
+                <li className="dropdown-menu" onClick={detectDropdownClick}>
+                    <a href="javascript:void(0);">
+                        {props.title} &nbsp;
+                        <Icon name="keyboard_arrow_down" size={20} />
+                    </a>
+                </li>
                 <ul className="dropdown">
                     {props.children}
                 </ul>
             </div>
+        </>
+    );
+}
+
+interface NavDropDonwItem extends AppPropsChildren {
+    href: string;
+}
+
+const NavDropDownItem = (props: NavDropDonwItem) => {
+        
+    return(
+        <>
+            {props.children}
         </>
     );
 }
@@ -125,6 +144,7 @@ Navbar.Toggle = NavbarToggle;
 Navbar.Collapse = NavbarCollapse;
 
 Nav.Link = NavLink;
+NavDropdown.Item = NavDropDownItem;
 
 //*-------------------------------------------- style
 const navHeight = '72px';
@@ -152,7 +172,7 @@ const NavStyle = styled.nav<AppPropsWithTheme>`
         }
 
         ul.dropdown {
-
+            transform: translateY(-50%);
             position: absolute; 
             left: 5px; 
             z-index: 10000000000;
@@ -162,7 +182,6 @@ const NavStyle = styled.nav<AppPropsWithTheme>`
             min-width: 120px; 
             box-sizing: border-box; 
             list-style: none; 
-            transition: top 1s;
         }
     }
 

@@ -4,7 +4,7 @@ import Navbar, { Nav, NavDropdown } from "./components/navigation/navbar";
 export default function App() {
 	return (
 		<>
-			<Navbar darkMode>
+			<Navbar>
 				<Navbar.Brand>DressaUI</Navbar.Brand>
 				<Navbar.Toggle aria-controls="basic-navbar-nav" />
 				<Navbar.Collapse id="basic-navbar-nav">
@@ -14,16 +14,16 @@ export default function App() {
 						<Nav.Link href="/">Edit</Nav.Link>
 						<Nav.Link href="/">Edit</Nav.Link>
 						<NavDropdown title="Dropdown" id="basic-nav-dropdown">
-							aaaa
+							<NavDropdown.Item href='/'>Action</NavDropdown.Item>
 						</NavDropdown>
 					</Nav>
 				</Navbar.Collapse>
 			</Navbar>
 
 
-			<Box bg="blue" width="200px">
+			{/* <Box bg="blue" width="200px">
 				this is a box.
-			</Box>
+			</Box> */}
 		</>
 	);
 }

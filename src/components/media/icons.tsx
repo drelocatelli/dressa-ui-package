@@ -1,3 +1,4 @@
+import { CSSProperties } from "react";
 import styled from "styled-components"
 
 /*
@@ -5,8 +6,14 @@ import styled from "styled-components"
     https://fonts.google.com/icons?selected=Material+Icons
 */
 
-export default function Icon(props: {name: string}) {
-    return <IconStyle>{props.name}</IconStyle>
+export default function Icon(
+    props: {
+        name: string;
+        size?: number;
+        style?: CSSProperties
+    }
+) {
+    return <IconStyle style={{...props.style, fontSize: `${props.size}px`}}>{props.name}</IconStyle>
 }
 
 const IconStyle = styled.div`

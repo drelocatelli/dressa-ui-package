@@ -5,6 +5,10 @@ export interface AppProps {
     style?: CSSProperties    
 }
 
+export interface AppPropsChildren extends AppProps{
+    children: React.ReactNode;
+}
+
 export interface AppPropsWithTheme extends AppProps {
     darkMode?: boolean;
 }
