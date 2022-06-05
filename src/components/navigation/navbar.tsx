@@ -1,12 +1,12 @@
 import { AppProps, AppPropsWithTheme } from "../../types/basicTypes";
 import styled from 'styled-components';
-import { maxLayout, mediumLayout } from "../constants";
+import { maxLayout } from "../constants";
 import Icon from "../media/icons";
-import React, { CSSProperties } from "react";
+import React, { CSSProperties, useEffect } from "react";
 
 const NavbarBrand = ({ children = 'Brand' }: AppProps) => <div className="brand">{children}</div>
 
-export default function Navbar(props : AppPropsWithTheme ) {
+export default function Navbar(props: AppPropsWithTheme) {
 
     return (
         <NavStyle darkMode={props.darkMode} style={props.style}>
@@ -18,7 +18,12 @@ export default function Navbar(props : AppPropsWithTheme ) {
 
 }
 
-export const Nav = (props: AppProps) => (<ul style={props.style}> {props.children} </ul>);
+export const Nav = (props: AppProps) => (
+    <>
+        <ul className="navbar-expanded" style={props.style}> {props.children} </ul>
+        <ul className="navbar-mobile" style={props.style}> {props.children} </ul>
+    </>
+);
 
 interface NavLinkProps {
     href: string;
@@ -43,26 +48,39 @@ const NavbarToggle = (props: NavToggleProps) => {
 
     function toggleNavbar() {
         const navbar = document.querySelector('.navbar')
-        const lis = navbar?.querySelectorAll('li');
+        const navbarMobile = navbar?.querySelector('.navbar-mobile') as HTMLElement;
 
-        lis?.forEach(li => {
-            const style = getComputedStyle(li);
+        if(navbarMobile) {
+            const style = getComputedStyle(navbarMobile);
 
-            li.style.display = (style.display == 'block') ? 'none' : 'block';
-        }); 
-    }
+            window.onresize = (ev) => { 
+                const {innerWidth} : any = ev.target;
     
-    return(
+                if(innerWidth >= maxLayout.width) {
+                    return navbarMobile.style.setProperty('display', 'none');
+                } 
+            }
+
+            if(style.display == 'none') {
+               return navbarMobile.style.setProperty('display', 'block');
+            } 
+
+            return navbarMobile.style.setProperty('display', 'none');
+
+        }
+    }
+
+    return (
         <>
             <button className="toggleButton" type="button" onClick={toggleNavbar}>
                 <Icon name="menu" />
             </button>
         </>
-    );    
-} 
+    );
+}
 
-const NavbarCollapse = (props: {children: React.ReactNode, id: string}) => {
-    return(
+const NavbarCollapse = (props: { children: React.ReactNode, id: string }) => {
+    return (
         <>
             {props.children}
         </>
@@ -89,12 +107,16 @@ const NavStyle = styled.nav<AppPropsWithTheme>`
     align-items: center;
     justify-content: space-around;
 
-    button.toggleButton {
-        display:none;
-    }
-
     .navbar {
         display: contents;
+    }
+    
+    .navbar-mobile {
+        display: none;
+    }
+
+    button.toggleButton {
+        display:none;
     }
 
     .brand {
@@ -103,21 +125,25 @@ const NavStyle = styled.nav<AppPropsWithTheme>`
         text-transform:capitalize;
     }
 
-    li {
-        list-style:none;
-        display:inline;
-
-        a {
-            display: inline-flex;
-            align-items: center;
-            height: ${navHeight};
-            box-sizing: border-box;
-            margin-right: 10px;
-            padding-inline: 12px;
-            transition: color .2s;
-            
+    .navbar-expanded {
+        li {
+            list-style:none;
+            display:inline;
+    
+            a {
+                display: inline-flex;
+                align-items: center;
+                height: ${navHeight};
+                box-sizing: border-box;
+                margin-right: 10px;
+                padding-inline: 12px;
+                transition: color .2s;
+                
+            }
         }
+
     }
+
 
     @media screen and (max-width: ${maxLayout.width}px) {
         flex-direction: column;
@@ -146,12 +172,16 @@ const NavStyle = styled.nav<AppPropsWithTheme>`
             margin: 10px 0;
         }
 
-        li {
+        .navbar-expanded {
             display: none;
-            
-            a {
-                height: auto;
-                padding:10px 0;
+        }
+
+        .navbar-mobile {
+            li {
+                a {
+                    height: auto;
+                    padding:10px 0;
+                }
             }
         }
     }
