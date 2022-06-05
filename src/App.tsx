@@ -4,7 +4,7 @@ import Navbar, { Nav, NavDropdown } from "./components/navigation/navbar";
 export default function App() {
 	return (
 		<>
-			<Navbar>
+			<Navbar darkMode>
 				<Navbar.Brand>DressaUI</Navbar.Brand>
 				<Navbar.Toggle aria-controls="basic-navbar-nav" />
 				<Navbar.Collapse id="basic-navbar-nav">
