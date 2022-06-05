@@ -265,6 +265,7 @@ const NavStyle = styled.nav<AppPropsWithTheme>`
                 position: relative;
                 left: initial;
                 top: initial;
+                min-width: initial;
             }
         }
 
