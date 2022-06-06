@@ -1,2 +1,2 @@
-export { Navbar, Nav } from './components/Navbar';
+export { Navbar, Nav, NavDropdown } from './components/Navbar';
 export { Icon } from './components/Icon';

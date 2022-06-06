@@ -15,8 +15,8 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 var jsxRuntime = require('react/jsx-runtime');
 var styled = require('styled-components');
-var react = require('react');
 require('./assets/css/basic.css');
+var react = require('react');
 
 function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
 
@@ -105,11 +105,41 @@ var NavbarToggle = function (props) {
 var NavbarCollapse = function (props) {
     return (jsxRuntime.jsx(jsxRuntime.Fragment, { children: props.children }));
 };
+var NavDropdown = function (props) {
+    var _a;
+    function detectDropdownClick() {
+        var dropdownExpanded = document.querySelector("#".concat(props.id));
+        var ulDropdown = dropdownExpanded === null || dropdownExpanded === void 0 ? void 0 : dropdownExpanded.querySelector('ul.dropdown');
+        var ulDropDownStyle = getComputedStyle(ulDropdown);
+        var ulDropDownMobile = document.querySelector('.navbar-mobile ul.dropdown');
+        // toggle mobile dropdown
+        if (getComputedStyle(ulDropDownMobile).display == 'block') {
+            ulDropDownMobile.style.setProperty('display', 'none');
+        }
+        else {
+            ulDropDownMobile.style.setProperty('display', 'block');
+        }
+        // toggle position of ul.dropdown
+        if (ulDropDownStyle.top.startsWith('-')) {
+            var navPosition = parseInt(navHeight);
+            ulDropdown.style.setProperty('top', "".concat(navPosition, "px"));
+        }
+        else {
+            ulDropdown.style.setProperty('top', '-8000px');
+        }
+    }
+    return (jsxRuntime.jsx(jsxRuntime.Fragment, { children: jsxRuntime.jsxs("div", __assign({ className: "dropdown-expanded", id: props.id }, { children: [jsxRuntime.jsx("li", __assign({ className: "dropdown-menu", onClick: detectDropdownClick }, { children: jsxRuntime.jsxs("a", __assign({ href: "javascript:void(0);" }, { children: [props.title, "\u00A0", (_a = props.icon) !== null && _a !== void 0 ? _a : jsxRuntime.jsx(Icon, { name: "arrow_drop_down" })] })) })), jsxRuntime.jsx("ul", __assign({ className: "dropdown" }, { children: props.children }))] })) }));
+};
+var NavDropDownItem = function (props) {
+    // const { darkMode, setDarkMode } = useContext(ThemeContext) as ThemeContextProps;
+    return (jsxRuntime.jsx(jsxRuntime.Fragment, { children: jsxRuntime.jsx("li", __assign({ style: props["li-style"] }, { children: jsxRuntime.jsx("a", __assign({ href: props.href, style: props["a-style"] }, { children: props.children })) })) }));
+};
 //*-------------------------------------------- childs
 Navbar.Brand = NavbarBrand;
 Navbar.Toggle = NavbarToggle;
 Navbar.Collapse = NavbarCollapse;
 Nav.Link = NavLink;
+NavDropdown.Item = NavDropDownItem;
 //*-------------------------------------------- style
 var navHeight = '72px';
 var NavStyle = styled__default["default"].nav(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n    ", ";\n\n    display: flex;\n    user-select:none;\n    height: ", ";\n    box-sizing: border-box;\n    align-items: center;\n    justify-content: space-around;\n\n    .navbar {\n        display: contents;\n    }\n    \n    .dropdown-expanded {\n        position: relative;\n        display: inline;\n        \n        li.dropdown-menu {\n            display: inline;\n\n            a {\n                display: inline-flex;\n                flex-direction: row;\n                align-items: stretch;\n            }\n        }\n\n        ul.dropdown {\n            transform: translateY(-50%);\n            position: absolute; \n            left: 5px; \n            z-index: 10000000000;\n            padding:18px 1rem; \n            min-width: 10rem;\n            top:-8000px;\n            box-sizing: border-box; \n            list-style: none; \n        }\n    }\n    \n    .navbar-mobile {\n        display: none;\n    }\n\n    button.toggleButton {\n        display:none;\n    }\n\n    .brand {\n        user-select:none;\n        font-size: 1.3rem;\n        text-transform:capitalize;\n    }\n\n    li {\n        list-style: none;\n    }\n\n    .navbar-expanded {\n        & > li {\n            display:inline;\n    \n            & > a {\n                display: inline-flex;\n                align-items: center;\n                height: ", ";\n                box-sizing: border-box;\n                margin-right: 10px;\n                padding-inline: 12px;\n                transition: color .2s;\n                \n            }\n        }\n\n    }\n\n\n    @media screen and (max-width: ", "px) {\n        flex-direction: column;\n        justify-content: space-between;\n        box-sizing: content-box;\n        height: auto;\n        padding: 20px 0;\n\n        .dropdown-expanded {\n            ul.dropdown {\n                display: none;\n                padding: initial;\n                position: relative;\n                left: initial;\n                top: initial;\n                min-width: initial;\n            }\n        }\n\n        button.toggleButton {\n            position: absolute;\n            top: 20px;\n            right: 23px;\n            display: block;\n            padding: 5px 1rem;\n            border: none;\n            outline:none;\n            border-radius: 8px;\n            background: transparent;\n\n            div {\n                font-size: 2rem;\n            }\n        }\n\n        .brand {\n            margin: 10px 0;\n        }\n\n        .navbar-expanded {\n            display: none;\n        }\n\n        .navbar-mobile {\n            li {\n                a {\n                    display: block;\n                    height: auto;\n                    padding:10px 0;\n                    margin: 10px 0;\n                }\n            }\n        }\n    }\n\n"], ["\n    ", ";\n\n    display: flex;\n    user-select:none;\n    height: ", ";\n    box-sizing: border-box;\n    align-items: center;\n    justify-content: space-around;\n\n    .navbar {\n        display: contents;\n    }\n    \n    .dropdown-expanded {\n        position: relative;\n        display: inline;\n        \n        li.dropdown-menu {\n            display: inline;\n\n            a {\n                display: inline-flex;\n                flex-direction: row;\n                align-items: stretch;\n            }\n        }\n\n        ul.dropdown {\n            transform: translateY(-50%);\n            position: absolute; \n            left: 5px; \n            z-index: 10000000000;\n            padding:18px 1rem; \n            min-width: 10rem;\n            top:-8000px;\n            box-sizing: border-box; \n            list-style: none; \n        }\n    }\n    \n    .navbar-mobile {\n        display: none;\n    }\n\n    button.toggleButton {\n        display:none;\n    }\n\n    .brand {\n        user-select:none;\n        font-size: 1.3rem;\n        text-transform:capitalize;\n    }\n\n    li {\n        list-style: none;\n    }\n\n    .navbar-expanded {\n        & > li {\n            display:inline;\n    \n            & > a {\n                display: inline-flex;\n                align-items: center;\n                height: ", ";\n                box-sizing: border-box;\n                margin-right: 10px;\n                padding-inline: 12px;\n                transition: color .2s;\n                \n            }\n        }\n\n    }\n\n\n    @media screen and (max-width: ", "px) {\n        flex-direction: column;\n        justify-content: space-between;\n        box-sizing: content-box;\n        height: auto;\n        padding: 20px 0;\n\n        .dropdown-expanded {\n            ul.dropdown {\n                display: none;\n                padding: initial;\n                position: relative;\n                left: initial;\n                top: initial;\n                min-width: initial;\n            }\n        }\n\n        button.toggleButton {\n            position: absolute;\n            top: 20px;\n            right: 23px;\n            display: block;\n            padding: 5px 1rem;\n            border: none;\n            outline:none;\n            border-radius: 8px;\n            background: transparent;\n\n            div {\n                font-size: 2rem;\n            }\n        }\n\n        .brand {\n            margin: 10px 0;\n        }\n\n        .navbar-expanded {\n            display: none;\n        }\n\n        .navbar-mobile {\n            li {\n                a {\n                    display: block;\n                    height: auto;\n                    padding:10px 0;\n                    margin: 10px 0;\n                }\n            }\n        }\n    }\n\n"])), function (props) { return (props.darkMode ? NavTheme.dark : NavTheme.light); }, navHeight, navHeight, maxLayout.width);
@@ -121,5 +151,6 @@ var templateObject_1;
 
 exports.Icon = Icon;
 exports.Nav = Nav;
+exports.NavDropdown = NavDropdown;
 exports.Navbar = Navbar;
 //# sourceMappingURL=index.js.map
