@@ -3754,10 +3754,10 @@ dotenv@^10.0.0:
   resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-10.0.0.tgz#3d4227b8fb95f81096cdd2b66653fb2c7085ba81"
   integrity sha512-rlBi9d8jpv9Sf1klPjNfFAuWDjKLwTIJJ/VxtoTwIR6hnZxcEOQCZg2oIL3MWBYw5GpUDKOEnND7LXTbIpQ03Q==
 
-dressa-ui@0.3.1:
-  version "0.3.1"
-  resolved "https://registry.yarnpkg.com/dressa-ui/-/dressa-ui-0.3.1.tgz#f3edd58f260c1c1ab9d9b601c09871256880ad54"
-  integrity sha512-LBrOI6/2JH082uPf8IIMkO/7OpLOfVIdiucbI+lHun5vqV8QI0vbQDWRefPvVmAh+5WJZKSjmHgJTdYEV6Av/g==
+dressa-ui@^0.3.4:
+  version "0.3.4"
+  resolved "https://registry.yarnpkg.com/dressa-ui/-/dressa-ui-0.3.4.tgz#a3e698c1f0f7f68169685fd2fed0da9f62f90c89"
+  integrity sha512-lGwLDDUysIHTiJAVilQCNj7Hl4uMimZEMQmXrjV8KK2nIlAPDqRwSaxf73O524NzZtsCV9wuHsvYNv47Be429A==
   dependencies:
     rollup-plugin-scss "^3.0.0"
     styled-components "^5.3.5"
@@ -3835,11 +3835,11 @@ error-ex@^1.3.1:
     is-arrayish "^0.2.1"
 
 error-stack-parser@^2.0.6:
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/error-stack-parser/-/error-stack-parser-2.1.1.tgz#cc6a2759d3c9ca9ee01642dde5814a101d5a82af"
-  integrity sha512-OuQiv82nAL9z8f2Qb3bnIEy8MZsmbfpkk8PiJnKclHPMuhVaOLGHgYjGnMJwbu+Cn4wEYQbq4STK9mXWn3DIcw==
+  version "2.1.3"
+  resolved "https://registry.yarnpkg.com/error-stack-parser/-/error-stack-parser-2.1.3.tgz#ab877c676540507dbe6429974ea66833ae68b7cb"
+  integrity sha512-F9KypcaAvLzI4yXneZzOvzZoqakhbjuAGFK0aLy33tYaDqdu6v+lzrN/TTG/mM48Op624zZZ2RpXRx3wA0+zmg==
   dependencies:
-    stackframe "^1.3.0"
+    stackframe "^1.3.4"
 
 es-abstract@^1.17.2, es-abstract@^1.19.0, es-abstract@^1.19.1, es-abstract@^1.19.2, es-abstract@^1.19.5, es-abstract@^1.20.1:
   version "1.20.1"
@@ -7927,10 +7927,10 @@ stack-utils@^2.0.3:
   dependencies:
     escape-string-regexp "^2.0.0"
 
-stackframe@^1.3.0:
-  version "1.3.1"
-  resolved "https://registry.yarnpkg.com/stackframe/-/stackframe-1.3.1.tgz#6bb22c46a7973a63f3175872b92467a01a561d58"
-  integrity sha512-tTpbH2/jS4MUFNR+yrZk5sydPlmuq2aV50C215EFo/MGtdnNl3qhiuwMW8+aDr+6AcJANOJ1amFr01f1VA6b5w==
+stackframe@^1.3.4:
+  version "1.3.4"
+  resolved "https://registry.yarnpkg.com/stackframe/-/stackframe-1.3.4.tgz#b881a004c8c149a5e8efef37d51b16e412943310"
+  integrity sha512-oeVtt7eWQS+Na6F//S4kJ2K2VbRlS9D43mAlMyVpVWovy9o+jfgH8O9agzANzaiLjclA0oYzUXEM4PurhSUChw==
 
 statuses@2.0.1:
   version "2.0.1"
