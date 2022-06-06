@@ -120,7 +120,7 @@ export const NavDropdown = (props: NavDropDownProps) => {
 
         // toggle position of ul.dropdown
         if (ulDropDownStyle.top.startsWith('-')) {
-            const navPosition = parseInt(navHeight);
+            const navPosition = parseInt(navHeight) + 25;
 
             ulDropdown.style.setProperty('top', `${navPosition}px`);
         } else {
@@ -211,6 +211,13 @@ const NavStyle = styled.nav<AppPropsWithTheme>`
             top:-8000px;
             box-sizing: border-box; 
             list-style: none; 
+
+            li {
+                a {
+                    display: block;
+                    padding:.5rem 0;
+                }
+            }
         }
     }
     
@@ -256,7 +263,7 @@ const NavStyle = styled.nav<AppPropsWithTheme>`
         justify-content: space-between;
         box-sizing: content-box;
         height: auto;
-        padding: 20px 0;
+        padding: 10px 0;
 
         .dropdown-expanded {
             ul.dropdown {
@@ -264,8 +271,12 @@ const NavStyle = styled.nav<AppPropsWithTheme>`
                 padding: initial;
                 position: relative;
                 left: initial;
-                top: initial;
+                top: 20px;
                 min-width: initial;
+                box-shadow: none;
+                margin-top: 20px;
+
+                
             }
         }
 
@@ -294,12 +305,13 @@ const NavStyle = styled.nav<AppPropsWithTheme>`
         }
 
         .navbar-mobile {
+            padding-top: 20px;
             li {
                 a {
                     display: block;
                     height: auto;
                     padding:10px 0;
-                    margin: 10px 0;
+                    margin: 0 0;
                 }
             }
         }
@@ -327,6 +339,7 @@ const NavTheme = {
         .dropdown-expanded {
             ul.dropdown {
                 background: #202024;
+                box-shadow: inset 0px 0px 4px #000;
             }
         }
     `,
@@ -349,6 +362,7 @@ const NavTheme = {
         .dropdown-expanded {
             ul.dropdown {
                 background: #f9f9f9;
+                box-shadow: inset 0px 0px 4px #ccc;
             }
         }
     `

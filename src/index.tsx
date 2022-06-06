@@ -1,16 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { Icon } from './components/Icons';
 import { Nav, Navbar, NavDropdown } from './components/Nav';
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
 );
-root.render(<React.StrictMode> <App /> </React.StrictMode>);
+root.render(
+    <React.StrictMode>
+        <App />
+    </React.StrictMode>
+);
 
 function App() {
     return (
         <>
-            <Navbar>
+            <Navbar darkMode style={{zoom: '150%'}}>
                 <Navbar.Brand children='DressaUI' />
                 Um design system clean ;)
                 <Navbar.Toggle aria-controls='basic' />
