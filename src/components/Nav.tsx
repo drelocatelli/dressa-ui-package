@@ -3,13 +3,17 @@ import styled from 'styled-components';
 import { maxLayout } from "./constants";
 import '../assets/css/basic.css';
 
-import { createContext, CSSProperties, useState } from "react";
-import {Icon} from "./Icons";
+import { createContext, CSSProperties, useContext, useState } from "react";
+import { Icon } from "./Icons";
 
 const ThemeContext = createContext({});
 
 export const NavbarBrand = ({ children = 'Brand' }: AppProps) => <div className="brand">{children}</div>
 
+interface ThemeProps {
+    darkMode?: boolean;
+    setDarkMode?: (darkMode: boolean) => void;
+}
 
 export function Navbar(props: AppPropsWithTheme) {
 
@@ -52,6 +56,7 @@ const NavLink = (props: NavLinkProps) => {
 interface NavToggleProps {
     "aria-controls": string;
     icon?: React.ReactNode;
+    target?: string;
 }
 
 const NavbarToggle = (props: NavToggleProps) => {
@@ -105,12 +110,17 @@ interface NavDropDownProps extends AppPropsChildren {
 
 export const NavDropdown = (props: NavDropDownProps) => {
 
-    function detectDropdownClick() {
+    function detectDropdownClick(e : React.MouseEvent<HTMLElement>) {
+
+        console.log(e)
+        
         const dropdownExpanded = document.querySelector(`#${props.id}`);
         const ulDropdown = dropdownExpanded?.querySelector('ul.dropdown') as HTMLElement;
         const ulDropDownStyle = getComputedStyle(ulDropdown);
 
-        const ulDropDownMobile = document.querySelector('.navbar-mobile ul.dropdown') as HTMLElement;
+        const dropdownMobile = document.querySelector(`#${props.id}`);
+        const ulDropDownMobile = dropdownMobile?.querySelector('ul.dropdown') as HTMLElement;
+
         // toggle mobile dropdown
         if (getComputedStyle(ulDropDownMobile).display == 'block') {
             ulDropDownMobile.style.setProperty('display', 'none');
@@ -120,7 +130,7 @@ export const NavDropdown = (props: NavDropDownProps) => {
 
         // toggle position of ul.dropdown
         if (ulDropDownStyle.top.startsWith('-')) {
-            const navPosition = parseInt(navHeight) + 25;
+            const navPosition = parseInt(navHeight) + 3;
 
             ulDropdown.style.setProperty('top', `${navPosition}px`);
         } else {
@@ -150,9 +160,6 @@ interface NavDropDonwItem extends NavLinkProps {
 }
 
 const NavDropDownItem = (props: NavDropDonwItem) => {
-
-    // const { darkMode, setDarkMode } = useContext(ThemeContext) as ThemeContextProps;
-
     return (
         <>
             <li style={props["li-style"]}>
@@ -162,16 +169,38 @@ const NavDropDownItem = (props: NavDropDonwItem) => {
     );
 }
 
+const NavdropdownDivider = (props: { style?: CSSProperties }) => {
+
+    const { darkMode } = useContext(ThemeContext) as ThemeProps;
+
+    return (
+        <NavSeparator darkMode={darkMode} style={props.style} />
+    );
+}
+
 //*-------------------------------------------- childs
 Navbar.Brand = NavbarBrand;
 Navbar.Toggle = NavbarToggle;
 Navbar.Collapse = NavbarCollapse;
 
 Nav.Link = NavLink;
+
 NavDropdown.Item = NavDropDownItem;
+NavDropdown.Divider = NavdropdownDivider;
 
 //*-------------------------------------------- style
 const navHeight = '72px';
+const dropdownIndent = '25px';
+
+const NavSeparator = styled.div<AppPropsWithTheme>`
+    border-bottom: 1px solid ${props => props.darkMode ? '#000' : '#eee'};
+    box-shadow: 0px -1px 1px ${props => props.darkMode ? '#fff' : '#000'};
+    margin: 5px 0;
+
+    @media screen and (max-width: ${maxLayout.width}px) {
+        margin-left: ${dropdownIndent};
+    }
+`;
 
 const NavStyle = styled.nav<AppPropsWithTheme>`
     ${props => (props.darkMode ? NavTheme.dark : NavTheme.light)};
@@ -265,7 +294,12 @@ const NavStyle = styled.nav<AppPropsWithTheme>`
         height: auto;
         padding: 10px 0;
 
+        
         .dropdown-expanded {
+            li.dropdown-menu {
+                display: block;
+            }
+
             ul.dropdown {
                 display: none;
                 padding: initial;
@@ -275,8 +309,7 @@ const NavStyle = styled.nav<AppPropsWithTheme>`
                 min-width: initial;
                 box-shadow: none;
                 margin-top: 20px;
-
-                
+                text-indent: ${dropdownIndent};
             }
         }
 
@@ -362,7 +395,7 @@ const NavTheme = {
         .dropdown-expanded {
             ul.dropdown {
                 background: #f9f9f9;
-                box-shadow: inset 0px 0px 4px #ccc;
+                // box-shadow: inset 0px 0px 4px #ccc;
             }
         }
     `

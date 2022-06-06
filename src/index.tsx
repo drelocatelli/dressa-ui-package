@@ -25,7 +25,11 @@ function App() {
                         <Nav.Link href='/'>Components</Nav.Link>
                         <NavDropdown title='Dev' id='basic-dpdown'>
                             <NavDropdown.Item href='https://github.com/drelocatelli/dressa-ui-package'>Github</NavDropdown.Item>
+                            <NavDropdown.Divider />
                             <NavDropdown.Item href='https://www.npmjs.com/package/dressa-ui'>NPM</NavDropdown.Item>
+                        </NavDropdown>
+                        <NavDropdown id='dropdown-2' title='Dropdown 2'>
+                            <NavDropdown.Item href='/'>Teste</NavDropdown.Item>
                         </NavDropdown>
                     </Nav>
                 </Navbar.Collapse>
