@@ -4,7 +4,7 @@ import { maxLayout } from "./constants";
 import '../assets/css/basic.css';
 
 import { createContext, CSSProperties, useState } from "react";
-import {Icon} from "./Icon";
+import {Icon} from "./Icons";
 
 const ThemeContext = createContext({});
 
