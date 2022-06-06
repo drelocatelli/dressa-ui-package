@@ -3754,7 +3754,7 @@ dotenv@^10.0.0:
   resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-10.0.0.tgz#3d4227b8fb95f81096cdd2b66653fb2c7085ba81"
   integrity sha512-rlBi9d8jpv9Sf1klPjNfFAuWDjKLwTIJJ/VxtoTwIR6hnZxcEOQCZg2oIL3MWBYw5GpUDKOEnND7LXTbIpQ03Q==
 
-dressa-ui@^0.3.1:
+dressa-ui@0.3.1:
   version "0.3.1"
   resolved "https://registry.yarnpkg.com/dressa-ui/-/dressa-ui-0.3.1.tgz#f3edd58f260c1c1ab9d9b601c09871256880ad54"
   integrity sha512-LBrOI6/2JH082uPf8IIMkO/7OpLOfVIdiucbI+lHun5vqV8QI0vbQDWRefPvVmAh+5WJZKSjmHgJTdYEV6Av/g==
