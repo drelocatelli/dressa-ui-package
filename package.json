@@ -7,10 +7,12 @@
     "dist"
   ],
   "dependencies": {
+    "react": "^18.1.0",
     "rollup-plugin-scss": "^3.0.0",
     "styled-components": "^5.3.5"
   },
   "scripts": {
+    "start": "react-scripts start",
     "build": "rm -rf ./dist && rollup -c && npm run build:css-copy",
     "build:css-copy": "cp -r ./src/assets/ ./dist/cjs/ && cp -r ./src/assets/ ./dist/esm/",
     "build-tsc": "rm -rf dist/ && npm run build:esm && npm run build:cjs && npm run build:css-copy",
@@ -54,7 +56,6 @@
     "webpack-cli": "^4.9.2"
   },
   "peerDependencies": {
-    "react": "^18.1.0",
     "react-dom": "^18.1.0"
   }
 }

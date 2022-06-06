@@ -9,7 +9,7 @@ export default {
    input: "src/index.ts",
    output: [
       {
-         file: pkg.main,
+         file: pkg["main-module"],
          format: "cjs",
          exports: "named",
          sourcemap: true,
