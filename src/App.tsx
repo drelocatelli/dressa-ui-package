@@ -1,4 +1,4 @@
-import { Icon, Nav, Navbar, NavDropdown } from "dressa-ui";
+import { Nav, Navbar, NavDropdown } from "dressa-ui";
 
 function App() {
   return (
