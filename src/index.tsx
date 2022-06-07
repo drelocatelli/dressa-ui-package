@@ -15,7 +15,7 @@ root.render(
 function App() {
     return (
         <>
-            <Navbar darkMode style={{zoom: '150%'}}>
+            <Navbar>
                 <Navbar.Brand children='DressaUI' />
                 Um design system clean ;)
                 <Navbar.Toggle aria-controls='basic' />

@@ -8,8 +8,13 @@
     src: url('../fonts/Material\ Icons.woff2') format('woff2');
 }
 
+@font-face {
+    font-family: 'Poppins';
+    src: url('../fonts/Poppins-Medium.ttf');
+}
+
 * {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Poppins', sans-serif;
     padding: 0;
     margin: 0;
 }

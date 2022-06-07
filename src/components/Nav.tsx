@@ -210,6 +210,7 @@ const NavStyle = styled.nav<AppPropsWithTheme>`
     height: ${navHeight};
     box-sizing: border-box;
     align-items: center;
+    font-size: 14px;
     justify-content: space-around;
 
     .navbar {
