@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { maxLayout } from "./constants";
 import '../assets/css/basic.css';
 
-import { createContext, createRef, CSSProperties, useContext, useState } from "react";
+import { createContext, createRef, CSSProperties, MouseEventHandler, useContext, useState } from "react";
 import { Icon } from "./Icons";
 
 const ThemeContext = createContext({});
@@ -54,7 +54,6 @@ const NavLink = (props: NavLinkProps) => {
 }
 
 interface NavToggleProps {
-    "aria-controls": string;
     icon?: React.ReactNode;
     target?: string;
 }
@@ -94,7 +93,7 @@ const NavbarToggle = (props: NavToggleProps) => {
     );
 }
 
-const NavbarCollapse = (props: { children: React.ReactNode, id: string }) => {
+const NavbarCollapse = (props: { children: React.ReactNode }) => {
     return (
         <>
             {props.children}
@@ -112,14 +111,26 @@ export const NavDropdown = (props: NavDropDownProps) => {
 
     const dropdownExpanded = createRef();
 
+    function closeOthersDropdown(allDropdowns : NodeListOf<HTMLElement>, dropdown : HTMLElement) {
+        // todo
+        // allDropdowns.forEach(item => {
+        //     if(item.id != dropdown.id) {
+        //         item.style.setProperty('display', 'none')
+        //     } else {
+        //         item.style.setProperty('display', 'block');
+        //     }
+        // });
+    }
+
     function detectDropdownClick(e: React.MouseEvent<HTMLElement>) {
         const dropdown = dropdownExpanded.current as HTMLElement;
         const dropdownContent = dropdown.querySelector('ul.dropdown') as HTMLElement;
+        const allDropdowns = document.querySelectorAll('ul.dropdown') as NodeListOf<HTMLElement>;
 
-        const navPosition = parseInt(navHeight) + 3;
+        // close others dropdowns && open this dropdown
 
 
-        console.log(window.outerWidth );
+        const navPosition = parseInt(navHeight) - 26;
 
         if(window.outerWidth < maxLayout.width) {
             // toggle block or none
@@ -128,6 +139,9 @@ export const NavDropdown = (props: NavDropDownProps) => {
             } else {
                 dropdownContent.style.setProperty('display', 'block');
             }
+        } else {
+            closeOthersDropdown(allDropdowns, dropdown);
+
         }
 
 
@@ -140,17 +154,16 @@ export const NavDropdown = (props: NavDropDownProps) => {
         }
     }
 
-
     return (
         <>
-            <div className="dropdown-expanded" ref={dropdownExpanded as React.RefObject<HTMLDivElement>}>
-                <li className="dropdown-menu" id={props.id} onClick={detectDropdownClick}>
+            <div className="dropdown-expanded" id={props.id} ref={dropdownExpanded as React.RefObject<HTMLDivElement>}>
+                <li className="dropdown-menu" onClick={detectDropdownClick}>
                     <a href="javascript:void(0);">
                         {props.title}&nbsp;
                         {props.icon ?? <Icon name="arrow_drop_down" />}
                     </a>
                 </li>
-                <ul className="dropdown">
+                <ul className="dropdown" id={props.id}>
                     {props.children}
                 </ul>
             </div>
@@ -235,7 +248,6 @@ const NavStyle = styled.nav<AppPropsWithTheme>`
         }
 
         ul.dropdown {
-            transform: translateY(-50%);
             position: absolute; 
             left: 5px; 
             z-index: 10000000000;
@@ -309,11 +321,11 @@ const NavStyle = styled.nav<AppPropsWithTheme>`
                 padding: initial;
                 position: relative;
                 left: initial;
-                top: 20px!important;
+                top: 0!important;
                 min-width: initial;
                 box-shadow: none;
-                margin-top: 20px;
                 text-indent: ${dropdownIndent};
+                background: transparent;
             }
         }
 
@@ -358,7 +370,7 @@ const NavStyle = styled.nav<AppPropsWithTheme>`
 
 const NavTheme = {
     dark: `
-        background: #F8F9FF;
+        background: #121214;
         color: rgb(225, 225, 230);
 
         button.toggleButton {
@@ -390,13 +402,14 @@ const NavTheme = {
         }
 
         a{
-            color: #8f8f8f;
+            color: #888;
             &:hover {
                 color: #000;
             }
         }
 
         .dropdown-expanded {
+            margin-right: 1rem;
             ul.dropdown {
                 background: #f9f9f9;
                 // box-shadow: inset 0px 0px 4px #ccc;
