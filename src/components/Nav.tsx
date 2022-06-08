@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { maxLayout } from "./constants";
 import '../assets/css/basic.css';
 
-import { createContext, CSSProperties, useContext, useState } from "react";
+import { createContext, createRef, CSSProperties, useContext, useState } from "react";
 import { Icon } from "./Icons";
 
 const ThemeContext = createContext({});
@@ -110,38 +110,41 @@ interface NavDropDownProps extends AppPropsChildren {
 
 export const NavDropdown = (props: NavDropDownProps) => {
 
-    function detectDropdownClick(e : React.MouseEvent<HTMLElement>) {
+    const dropdownExpanded = createRef();
 
-        console.log(e)
-        
-        const dropdownExpanded = document.querySelector(`#${props.id}`);
-        const ulDropdown = dropdownExpanded?.querySelector('ul.dropdown') as HTMLElement;
-        const ulDropDownStyle = getComputedStyle(ulDropdown);
+    function detectDropdownClick(e: React.MouseEvent<HTMLElement>) {
+        const dropdown = dropdownExpanded.current as HTMLElement;
+        const dropdownContent = dropdown.querySelector('ul.dropdown') as HTMLElement;
 
-        const dropdownMobile = document.querySelector(`#${props.id}`);
-        const ulDropDownMobile = dropdownMobile?.querySelector('ul.dropdown') as HTMLElement;
+        const navPosition = parseInt(navHeight) + 3;
 
-        // toggle mobile dropdown
-        if (getComputedStyle(ulDropDownMobile).display == 'block') {
-            ulDropDownMobile.style.setProperty('display', 'none');
-        } else {
-            ulDropDownMobile.style.setProperty('display', 'block');
+
+        console.log(window.outerWidth );
+
+        if(window.outerWidth < maxLayout.width) {
+            // toggle block or none
+            if(getComputedStyle(dropdownContent).display == 'block') {
+                dropdownContent.style.setProperty('display', 'none');
+            } else {
+                dropdownContent.style.setProperty('display', 'block');
+            }
         }
 
-        // toggle position of ul.dropdown
-        if (ulDropDownStyle.top.startsWith('-')) {
-            const navPosition = parseInt(navHeight) + 3;
 
-            ulDropdown.style.setProperty('top', `${navPosition}px`);
+        // toggle position of ul.dropdown
+        if (getComputedStyle(dropdownContent).top.startsWith('-')) {
+
+            dropdownContent.style.setProperty('top', `${navPosition}px`);
         } else {
-            ulDropdown.style.setProperty('top', '-8000px');
+            dropdownContent.style.setProperty('top', `-800px`);
         }
     }
 
+
     return (
         <>
-            <div className="dropdown-expanded" id={props.id}>
-                <li className="dropdown-menu" onClick={detectDropdownClick}>
+            <div className="dropdown-expanded" ref={dropdownExpanded as React.RefObject<HTMLDivElement>}>
+                <li className="dropdown-menu" id={props.id} onClick={detectDropdownClick}>
                     <a href="javascript:void(0);">
                         {props.title}&nbsp;
                         {props.icon ?? <Icon name="arrow_drop_down" />}
@@ -306,7 +309,7 @@ const NavStyle = styled.nav<AppPropsWithTheme>`
                 padding: initial;
                 position: relative;
                 left: initial;
-                top: 20px;
+                top: 20px!important;
                 min-width: initial;
                 box-shadow: none;
                 margin-top: 20px;
@@ -355,7 +358,7 @@ const NavStyle = styled.nav<AppPropsWithTheme>`
 
 const NavTheme = {
     dark: `
-        background: #202024;
+        background: #F8F9FF;
         color: rgb(225, 225, 230);
 
         button.toggleButton {

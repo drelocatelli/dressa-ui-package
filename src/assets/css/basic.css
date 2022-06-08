@@ -13,8 +13,14 @@
     src: url('../fonts/Poppins-Medium.ttf');
 }
 
+@font-face {
+    font-family: 'Mulish';
+    src: url('../fonts/Mulish-Bold.ttf');
+}
+
 * {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Mulish', sans-serif;
+    font-size: 16px;
     padding: 0;
     margin: 0;
 }
