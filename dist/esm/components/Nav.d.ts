@@ -8,7 +8,6 @@ export declare namespace Navbar {
     var Toggle: (props: NavToggleProps) => JSX.Element;
     var Collapse: (props: {
         children: import("react").ReactNode;
-        id: string;
     }) => JSX.Element;
 }
 export declare const Nav: {
@@ -22,8 +21,8 @@ interface NavLinkProps {
     "li-style"?: CSSProperties;
 }
 interface NavToggleProps {
-    "aria-controls": string;
     icon?: React.ReactNode;
+    target?: string;
 }
 interface NavDropDownProps extends AppPropsChildren {
     title: string;
@@ -33,6 +32,9 @@ interface NavDropDownProps extends AppPropsChildren {
 export declare const NavDropdown: {
     (props: NavDropDownProps): JSX.Element;
     Item: (props: NavDropDonwItem) => JSX.Element;
+    Divider: (props: {
+        style?: CSSProperties;
+    }) => JSX.Element;
 };
 interface NavDropDonwItem extends NavLinkProps {
     href: string;

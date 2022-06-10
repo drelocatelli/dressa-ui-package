@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { maxLayout } from "./constants";
 import '../assets/css/basic.css';
 
-import { createContext, createRef, CSSProperties, MouseEventHandler, useContext, useState } from "react";
+import { createContext, createRef, CSSProperties, useContext, useState } from "react";
 import { Icon } from "./Icons";
 
 const ThemeContext = createContext({});
@@ -111,24 +111,9 @@ export const NavDropdown = (props: NavDropDownProps) => {
 
     const dropdownExpanded = createRef();
 
-    function closeOthersDropdown(allDropdowns : NodeListOf<HTMLElement>, dropdown : HTMLElement) {
-        // todo
-        // allDropdowns.forEach(item => {
-        //     if(item.id != dropdown.id) {
-        //         item.style.setProperty('display', 'none')
-        //     } else {
-        //         item.style.setProperty('display', 'block');
-        //     }
-        // });
-    }
-
-    function detectDropdownClick(e: React.MouseEvent<HTMLElement>) {
+    function detectDropdownClick() {
         const dropdown = dropdownExpanded.current as HTMLElement;
         const dropdownContent = dropdown.querySelector('ul.dropdown') as HTMLElement;
-        const allDropdowns = document.querySelectorAll('ul.dropdown') as NodeListOf<HTMLElement>;
-
-        // close others dropdowns && open this dropdown
-
 
         const navPosition = parseInt(navHeight) - 26;
 
@@ -139,9 +124,6 @@ export const NavDropdown = (props: NavDropDownProps) => {
             } else {
                 dropdownContent.style.setProperty('display', 'block');
             }
-        } else {
-            closeOthersDropdown(allDropdowns, dropdown);
-
         }
 
 
