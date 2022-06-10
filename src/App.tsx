@@ -1,3 +1,4 @@
+//@ts-ignore
 import { Nav, Navbar, NavDropdown } from 'dressa-ui';
 import React from 'react';
 
@@ -8,7 +9,7 @@ function App() {
         <Navbar.Brand children='DressaUI' />
         Um design system clean ;)
         <Navbar.Toggle aria-controls='basic' />
-        <Navbar.Collapse id='basic'>
+        <Navbar.Collapse>
           <Nav>
             <Nav.Link href='/'>Home</Nav.Link>
             <Nav.Link href='/'>Components</Nav.Link>

@@ -3754,10 +3754,10 @@ dotenv@^10.0.0:
   resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-10.0.0.tgz#3d4227b8fb95f81096cdd2b66653fb2c7085ba81"
   integrity sha512-rlBi9d8jpv9Sf1klPjNfFAuWDjKLwTIJJ/VxtoTwIR6hnZxcEOQCZg2oIL3MWBYw5GpUDKOEnND7LXTbIpQ03Q==
 
-dressa-ui@^0.3.4:
-  version "0.3.4"
-  resolved "https://registry.yarnpkg.com/dressa-ui/-/dressa-ui-0.3.4.tgz#a3e698c1f0f7f68169685fd2fed0da9f62f90c89"
-  integrity sha512-lGwLDDUysIHTiJAVilQCNj7Hl4uMimZEMQmXrjV8KK2nIlAPDqRwSaxf73O524NzZtsCV9wuHsvYNv47Be429A==
+dressa-ui@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/dressa-ui/-/dressa-ui-1.0.5.tgz#724f7a7761601fe86c05135796ec48e2ed8a1aaf"
+  integrity sha512-+S4QrCajRmZIJSc3nURgdd4rg/YDOLJILjgm/glj1RbEKc22/Fi0tqxR1hJoQEWdQV1GVcoID5ZbZmMXt5psYg==
   dependencies:
     rollup-plugin-scss "^3.0.0"
     styled-components "^5.3.5"
