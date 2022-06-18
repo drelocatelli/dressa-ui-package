@@ -1,7 +1,6 @@
 import { AppProps, AppPropsChildren, AppPropsWithTheme } from "../types/basicTypes";
 import styled from 'styled-components';
 import { maxLayout } from "./constants";
-import '../assets/css/basic.css';
 
 import { createContext, createRef, CSSProperties, useContext, useState } from "react";
 import { Icon } from "./Icons";

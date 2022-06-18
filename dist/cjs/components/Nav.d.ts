@@ -1,5 +1,4 @@
 import { AppProps, AppPropsChildren, AppPropsWithTheme } from "../types/basicTypes";
-import '../assets/css/basic.css';
 import { CSSProperties } from "react";
 export declare const NavbarBrand: ({ children }: AppProps) => JSX.Element;
 export declare function Navbar(props: AppPropsWithTheme): JSX.Element;
