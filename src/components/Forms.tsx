@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { AppProps } from "../types/basicTypes";
+import '../assets/css/basic.css';
 
 interface FormProps extends React.FormHTMLAttributes<HTMLFormElement> {
     children: React.ReactNode;
