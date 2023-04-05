@@ -1,59 +1,43 @@
 {
-  "name": "dressa-ui",
-  "version": "1.0.3",
-  "main": "dist/cjs/index.js",
-  "module": "dist/esm/index.js",
-  "files": [
-    "dist"
-  ],
-  "dependencies": {
-    "react": "^18.1.0",
-    "react-dom": "^18.1.0",
-    "rollup-plugin-scss": "^3.0.0",
-    "styled-components": "^5.3.5"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "rm -rf ./dist && rollup -c && npm run build:css-copy",
-    "build:css-copy": "cp -r ./src/assets/ ./dist/cjs/ && cp -r ./src/assets/ ./dist/esm/",
-    "build-tsc": "rm -rf dist/ && npm run build:esm && npm run build:cjs && npm run build:css-copy",
-    "build:esm": "tsc",
-    "build:cjs": "tsc --module CommonJS --outDir dist/cjs"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "devDependencies": {
-    "@testing-library/jest-dom": "^5.16.4",
-    "@testing-library/react": "^13.3.0",
-    "@testing-library/user-event": "^13.5.0",
-    "@types/jest": "^27.5.2",
-    "@types/node": "^16.11.38",
-    "@types/react": "^18.0.11",
-    "@types/react-dom": "^18.0.5",
-    "@types/styled-components": "^5.1.25",
-    "react-scripts": "5.0.1",
-    "rollup-plugin-import-css": "^3.0.3",
-    "rollup-plugin-postcss": "^4.0.2",
-    "rollup-plugin-sass": "^1.2.12",
-    "rollup-plugin-typescript2": "^0.32.0",
-    "typescript": "^4.7.3",
-    "web-vitals": "^2.1.4",
-    "webpack-cli": "^4.9.2"
-  }
+    "name": "dressa-ui",
+    "private": false,
+    "version": "2.0.4",
+    "type": "module",
+    "scripts": {
+        "dev": "vite",
+        "build": "tsc && vite build",
+        "preview": "vite preview"
+    },
+    "dependencies": {
+        "@emotion/css": "^11.10.6",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0",
+        "sass": "^1.60.0",
+        "styled-components": "^5.3.9"
+    },
+    "peerDependencies": {
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0",
+        "sass": "^1.60.0",
+        "styled-components": "^5.3.9",
+        "@emotion/css": "^11.10.6"
+    },
+    "devDependencies": {
+        "@types/react": "^18.0.28",
+        "@types/react-dom": "^18.0.11",
+        "@types/styled-components": "^5.1.26",
+        "@vitejs/plugin-react": "^3.1.0",
+        "typescript": "^4.9.3",
+        "vite": "^4.2.0",
+        "vite-plugin-dts": "^2.2.0"
+    },
+    "main": "dist/my-lib.umd.js",
+    "module": "dist/my-lib.es.js",
+    "types": "dist/index.d.ts",
+    "exports": {
+        ".": {
+            "import": "./dist/my-lib.es.js",
+            "require": "./dist/my-lib.umd.js"
+        }
+    }
 }
